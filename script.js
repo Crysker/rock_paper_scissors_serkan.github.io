@@ -145,4 +145,5 @@ function reset() {
   document.querySelector('.gameArea').style.display = 'none';
   document.querySelector('body').classList.remove('changeBackground');
   input.style.display = 'inline';
+  reload.page();
 }
