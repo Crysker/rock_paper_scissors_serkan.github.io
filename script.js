@@ -28,7 +28,10 @@ let scenario = {
   draw: {
     image: './images/draw.png',
     text: 'Like there is a chance for you to wi..., wait what??? A DRAW',
-    buttons: [[ 'Try again', 'advanceTo(scenario.choice1)',]],
+    buttons: [
+      [ 'Try again', 'advanceTo(scenario.choice1)',],
+      ['Reset', 'reset()',],
+  ],
     sound: './sound/what.mp3',
 
   
@@ -37,13 +40,18 @@ let scenario = {
  
     image: './images/lose.png',
     text: 'Seems like a mere mortal could not beat him, how pathetic',
-    buttons: [['Try again', 'advanceTo(scenario.choice1)',]],
+    buttons: [['Try again', 'advanceTo(scenario.choice1)',],
+    ['Reset', 'reset()',],
+
+  ],
     sound: './sound/game-over.mp3',
   },
   win: {
     image: './images/win_computer.jpg',
     text: 'Oh wow, you rly beat him, no way? There must be a mistake, try again! NOWWWW!!!.',
-    buttons:[['Try again', 'advanceTo(scenario.choice1)',]],
+    buttons:[['Try again', 'advanceTo(scenario.choice1)',],
+    ['Reset', 'reset()',],
+  ],
     sound: './sound/finish.mp3',
   },
 };
@@ -98,7 +106,6 @@ let changeButtons = function (buttonList) {
   buttonBox.innerHTML = '';
   if (buttonList === undefined) return;
 
-  // [1] is the action and [0] is the text of the button
   for (let i = 0; i < buttonList.length; i++) {
     buttonBox.innerHTML += `<button class="btn btn-sm btn-primary" onclick=${buttonList[i][1]}>${buttonList[i][0]}</button>`;
   }
@@ -113,7 +120,6 @@ let changeSound = (soundSource) => {
 
 
 let advanceTo = function (scenario) {
-  // Stop any current sound
   currSound.pause();
 
   changeImage(scenario.image);
