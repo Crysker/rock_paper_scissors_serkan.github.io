@@ -3,6 +3,10 @@ let images = document.getElementById('images');
 let text = document.getElementById('text');
 let buttonBox = document.getElementById('buttonBox');
 let input = document.getElementById('input');
+const userScoreP = document.querySelector("#userScore");
+const cpuScoreP = document.querySelector("#cpuScore");
+let userScore = 0;
+let cpuScore = 0;
 
 let playerName;
 
@@ -37,7 +41,7 @@ let scenario = {
   
   },
   lose: {
- 
+    text: "cpuWin()",
     image: './images/lose.png',
     text: 'Seems like a mere mortal could not beat him, how pathetic',
     buttons: [['Try again', 'advanceTo(scenario.choice1)',],
@@ -47,6 +51,7 @@ let scenario = {
     sound: './sound/game-over.mp3',
   },
   win: {
+    text: "playerWin()",
     image: './images/win_computer.jpg',
     text: 'Oh wow, you rly beat him, no way? There must be a mistake, try again! NOWWWW!!!.',
     buttons:[['Try again', 'advanceTo(scenario.choice1)',],
@@ -65,20 +70,19 @@ function nameInput(event) {
     advanceTo(scenario.choice1);
   }
 }
-function ballHitBrick() {
-  score += 1;
-  scoreText.setText('Points: '+score);
-}
 
 function winCon(){
 if(0 == randomNumber()){
+  playerWin();
   advanceTo(scenario.win);
   
 
 }else if (1 == randomNumber()){
+ 
+  cpuWin();
   advanceTo(scenario.lose);
-  
-  
+
+
 }else{
   advanceTo(scenario.draw);
   
@@ -140,6 +144,7 @@ function startGame() {
 
 
 function reset() {
+  location.reload();
   currSound.pause();
   document.querySelector('.greeting').style.display = 'flex';
   document.querySelector('.gameArea').style.display = 'none';
@@ -147,3 +152,13 @@ function reset() {
   input.style.display = 'inline';
   reload.page();
 }
+const playerWin = () => {
+  userScore++;
+  userScoreP.innerHTML = userScore;
+
+};
+
+const cpuWin = (cpu) => {
+  cpuScore++;
+  cpuScoreP.innerHTML = cpuScore;
+};
